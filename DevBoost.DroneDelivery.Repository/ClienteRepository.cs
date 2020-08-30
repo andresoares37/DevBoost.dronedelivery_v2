@@ -2,6 +2,7 @@
 using DevBoost.DroneDelivery.Domain.Interfaces.Repositories;
 using DevBoost.DroneDelivery.Domain.Interfaces.Services;
 using DevBoost.DroneDelivery.Repository.Context;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,23 +13,28 @@ namespace DevBoost.DroneDelivery.Repository
     public class ClienteRepository : IClienteRepository
     {
         private readonly DCDroneDelivery _context;
-        public Task<bool> Delete(Cliente cliente)
-        {
-            throw new NotImplementedException();
-        }
         public ClienteRepository(DCDroneDelivery context)
         {
             this._context = context;
         }
-
-        public Task<IList<Cliente>> GetAll()
+        public async Task<bool> Delete(Cliente cliente)
         {
-            throw new NotImplementedException();
+            _context.Cliente.Remove(cliente);
+            return await _context.SaveChangesAsync() > 0;
+        }
+        
+
+        public async Task<IList<Cliente>> GetAll()
+        {
+            return await _context.Cliente
+                .AsNoTracking()
+                .Include(p => p.Pedido)
+                .ToListAsync();
         }
 
-        public Task<Cliente> GetById(int id)
+        public async Task<Cliente> GetById(int id)
         {
-            throw new NotImplementedException();
+            return await _context.Cliente.FindAsync(id);
         }
 
         public async Task<bool> Insert(Cliente cliente)

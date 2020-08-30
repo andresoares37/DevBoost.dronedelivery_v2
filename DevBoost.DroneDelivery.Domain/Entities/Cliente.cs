@@ -11,6 +11,11 @@ namespace DevBoost.dronedelivery.Domain
         public string Nome { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
+        public Guid PedidoId { get; set; }
+
+        //public List<Pedido> Pedido { get; set; }
+
+        public Pedido Pedido { get; set; }
 
     }
 }

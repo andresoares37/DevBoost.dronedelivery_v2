@@ -11,10 +11,17 @@ namespace DevBoost.DroneDelivery.Repository.Context
         public DCDroneDelivery(DbContextOptions options) : base(options)
         {
         }
-
+        
         public DbSet<Pedido> Pedido { get; set; }
         public DbSet<Drone> Drone { get; set; }
         public DbSet<DroneItinerario> DroneItinerario { get; set; }
         public DbSet<Cliente> Cliente{ get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Pedido>()
+                .HasOne(p => p.Cliente)
+                .WithOne(b => b.Pedido);
+        }
     }
 }

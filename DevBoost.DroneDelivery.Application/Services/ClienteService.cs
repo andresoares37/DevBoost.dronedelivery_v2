@@ -10,8 +10,20 @@ namespace DevBoost.DroneDelivery.Application.Services
     public class ClienteService : IClienteService
     {
         private readonly IClienteRepository _clienteRepository;
+        private readonly IPedidoRepository _repositoryPedido;
+        private readonly IDroneItinerarioRepository _droneItinerarioRepository;
+        private readonly IDroneRepository _droneRepository;
         private const double _latitudeLoja = -23.5880684;
         private const double _longitudeLoja = -46.6564195;
+
+        public ClienteService(IClienteRepository clienteRepository,
+            IDroneItinerarioRepository droneItinerarioRepository,
+            IDroneRepository droneRepository)
+        {
+            _clienteRepository = clienteRepository;
+            _droneItinerarioRepository = droneItinerarioRepository;
+            _droneRepository = droneRepository;
+        }
         public ClienteService(IClienteRepository clienteRepository)
         {
             _clienteRepository = clienteRepository;

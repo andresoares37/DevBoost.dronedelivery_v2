@@ -17,6 +17,8 @@ namespace DevBoost.dronedelivery.Domain
         //public DateTime PrevisaoEntrega { get; set; }
         public EnumStatusPedido Status { get; set; }
 
+        public Cliente Cliente { get; set; }
+
         public void InformarHoraPedido(DateTime horaPedido)
         {
             this.DataHora = horaPedido;

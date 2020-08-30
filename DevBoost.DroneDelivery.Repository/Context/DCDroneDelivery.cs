@@ -15,5 +15,6 @@ namespace DevBoost.DroneDelivery.Repository.Context
         public DbSet<Pedido> Pedido { get; set; }
         public DbSet<Drone> Drone { get; set; }
         public DbSet<DroneItinerario> DroneItinerario { get; set; }
+        public DbSet<Cliente> Cliente{ get; set; }
     }
 }
